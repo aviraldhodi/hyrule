@@ -11,6 +11,10 @@ Hyrule is a local-first Salesforce operations platform built as a VS Code extens
 - **Color Framework (`HylianContext.jsx`)**: A React context that manages UI themes and custom Org color mappings.
   - Users can click a gear icon (⚙️) on the left of any valid org to open a native hex color picker modal. The exact hex code is saved and mapped to that org.
 
+## VS Code Integration & Launch
+- **Command Palette (`Ctrl+Shift+P`)**: The user can run the `Launch Hyrule` command (registered as `hyrule.launch`).
+- **Auto-Open**: Once the command is run, `extension.js` forks the Node process. When `server.js` finishes starting on port `3030`, it sends a standard Node IPC message (`process.send('SERVER_READY')`) back to the Extension Host. The extension then automatically launches the user's default browser to `http://localhost:3030`.
+
 ## Dev & Packaging Scripts
 We avoid bundling heavy Node.js runtimes. The footprint is extremely small (under 100KB).
 - `npm run dev`: Runs `scripts/dev.js` which concurrently launches the Express server and the Vite dev server for seamless development (with `shell: true` to support Windows environments).
