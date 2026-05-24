@@ -5,13 +5,15 @@ Hyrule is a local-first Salesforce operations platform built as a VS Code extens
 
 ## Architecture
 - **VS Code Extension (`extension.js`)**: Uses `child_process.fork()` to spin up a background Node.js process without blocking the main VS Code thread. It opens the user's default browser to `http://localhost:3030`.
-- **Backend (`server.js`)**: An Express server running in the background. It executes `sf` CLI commands and serves the built frontend files.
-- **Frontend (`frontend/`)**: A React + Vite application. It builds into the root `public/` directory so the Express server can host it.
-- **Color Framework (`HylianContext.jsx`)**: A React context that manages themes and Org color mappings. It updates CSS variables dynamically on the `<body>` tag.
+- **Backend (`server.js`)**: An Express server running in the background. It executes `sf org list --all --json` to fetch all authenticated orgs, including expired ones.
+- **Frontend (`frontend/`)**: A React + Vite application. It builds into the root `public/` directory so the Express server can serve it.
+- **Top Bar UI (`OrgSelector.jsx`)**: The primary navigation component. It features a broad dropdown for selecting orgs (which prominently displays `username` over alias). Expired orgs are greyed out and unselectable.
+- **Color Framework (`HylianContext.jsx`)**: A React context that manages UI themes and custom Org color mappings.
+  - Users can click a gear icon (⚙️) on the left of any valid org to open a native hex color picker modal. The exact hex code is saved and mapped to that org.
 
 ## Dev & Packaging Scripts
 We avoid bundling heavy Node.js runtimes. The footprint is extremely small (under 100KB).
-- `npm run dev`: Runs `scripts/dev.js` which concurrently launches the Express server and the Vite dev server for seamless development.
+- `npm run dev`: Runs `scripts/dev.js` which concurrently launches the Express server and the Vite dev server for seamless development (with `shell: true` to support Windows environments).
 - `npm run upgrade`: Runs `scripts/upgrade.js`. Copies all dev code into the `PackagedCopy/` directory, omitting anything listed in `ignore_dnb`.
 - `npm run build`: Runs `scripts/build.js`. Syncs to `PackagedCopy/`, runs `vsce package` inside it, and moves the final `.vsix` file to `vsixBuilds/`.
 
@@ -22,7 +24,7 @@ Themes are controlled via CSS variables in `themes.css`. Supported themes:
 3. Catppuccin (Font: Outfit)
 4. Nord (Font: Roboto)
 
-Each theme provides a palette (`--palette-red`, `--palette-green`, etc.) which users can map to specific Salesforce orgs to visually distinguish them across the app.
+*Note: Theme palettes are used for the UI background/foreground styling, but individual Org mappings use literal hex values chosen by the user.*
 
 ## Project Structure
 ```text
