@@ -1,0 +1,89 @@
+:root {
+  /* Default font */
+  --font-primary: 'Inter', sans-serif;
+}
+
+/* Gruvbox */
+[data-theme='gruvbox'] {
+  --bg-color: #282828;
+  --text-color: #ebdbb2;
+  --primary-color: #d79921; /* Yellow */
+  --secondary-color: #458588; /* Blue */
+  --card-bg: #3c3836;
+  --border-color: #504945;
+  --font-primary: 'Fira Code', monospace;
+  
+  /* Palette for Org mapping */
+  --palette-red: #cc241d;
+  --palette-green: #98971a;
+  --palette-yellow: #d79921;
+  --palette-blue: #458588;
+  --palette-purple: #b16286;
+  --palette-aqua: #689d6a;
+}
+
+/* Everforest */
+[data-theme='everforest'] {
+  --bg-color: #2b3339;
+  --text-color: #d3c6aa;
+  --primary-color: #a7c080; /* Green */
+  --secondary-color: #7fbbb3; /* Blue */
+  --card-bg: #323c41;
+  --border-color: #475258;
+  --font-primary: 'Nunito', sans-serif;
+
+  /* Palette for Org mapping */
+  --palette-red: #e67e80;
+  --palette-green: #a7c080;
+  --palette-yellow: #dbbc7f;
+  --palette-blue: #7fbbb3;
+  --palette-purple: #d699b6;
+  --palette-aqua: #83c092;
+}
+
+/* Catppuccin (Macchiato) */
+[data-theme='catppuccin'] {
+  --bg-color: #24273a;
+  --text-color: #cad3f5;
+  --primary-color: #c6a0f6; /* Mauve */
+  --secondary-color: #8aadf4; /* Blue */
+  --card-bg: #363a4f;
+  --border-color: #494d64;
+  --font-primary: 'Outfit', sans-serif;
+
+  /* Palette for Org mapping */
+  --palette-red: #ed8796;
+  --palette-green: #a6da95;
+  --palette-yellow: #eed49f;
+  --palette-blue: #8aadf4;
+  --palette-purple: #c6a0f6;
+  --palette-aqua: #8bd5ca;
+}
+
+/* Nord */
+[data-theme='nord'] {
+  --bg-color: #2e3440;
+  --text-color: #d8dee9;
+  --primary-color: #88c0d0; /* Frost Blue */
+  --secondary-color: #81a1c1; /* Darker Blue */
+  --card-bg: #3b4252;
+  --border-color: #4c566a;
+  --font-primary: 'Roboto', sans-serif;
+
+  /* Palette for Org mapping */
+  --palette-red: #bf616a;
+  --palette-green: #a3be8c;
+  --palette-yellow: #ebcb8b;
+  --palette-blue: #5e81ac;
+  --palette-purple: #b48ead;
+  --palette-aqua: #8fbcbb;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-primary);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+}

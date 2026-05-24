@@ -1,0 +1,16 @@
+# Build and Packaged
+PackagedCopy/
+vsixBuilds/
+*_dnb
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Logs and Env
+*.log
+.env
+
+# VS Code
+.vscode/
+*.vsix

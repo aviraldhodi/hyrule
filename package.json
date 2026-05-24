@@ -1,0 +1,43 @@
+{
+	"name": "hyrule",
+	"displayName": "Hyrule Salesforce Admin",
+	"description": "Local-first Salesforce operations platform",
+	"version": "1.0.0",
+	"publisher": "aviraldhodi",
+	"engines": {
+		"vscode": "^1.74.0",
+		"node": ">=16.0.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"os": [
+		"win32"
+	],
+	"activationEvents": [
+		"onCommand:hyrule.launch"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "hyrule.launch",
+				"title": "Launch Hyrule",
+				"category": "Salesforce"
+			}
+		]
+	},
+	"scripts": {
+		"dev": "node scripts/dev.js",
+		"build": "node scripts/build.js",
+		"upgrade": "node scripts/upgrade.js"
+	},
+	"dependencies": {
+		"express": "^4.18.2",
+		"cors": "^2.8.5"
+	},
+	"devDependencies": {
+		"@vscode/vsce": "^2.22.0",
+		"@types/vscode": "^1.74.0"
+	}
+}
