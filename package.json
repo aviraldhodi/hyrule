@@ -33,11 +33,12 @@
 		"upgrade": "node scripts/upgrade.js"
 	},
 	"dependencies": {
-		"express": "^4.18.2",
-		"cors": "^2.8.5"
+		"cors": "^2.8.5",
+		"express": "^4.18.2"
 	},
 	"devDependencies": {
+		"@types/vscode": "^1.74.0",
 		"@vscode/vsce": "^2.22.0",
-		"@types/vscode": "^1.74.0"
+		"esbuild": "^0.28.0"
 	}
 }
