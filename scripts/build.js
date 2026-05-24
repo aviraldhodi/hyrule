@@ -9,20 +9,12 @@ const VSIX_BUILDS_DIR = path.join(ROOT_DIR, 'vsixBuilds');
 function run() {
     console.log('Starting Build Process...');
 
-    // 1. Run the upgrade script to sync
-    console.log('Syncing files to PackagedCopy...');
-    execSync('node scripts/upgrade.js', { stdio: 'inherit', cwd: ROOT_DIR });
-
     // Ensure vsixBuilds directory exists
     if (!fs.existsSync(VSIX_BUILDS_DIR)) {
         fs.mkdirSync(VSIX_BUILDS_DIR, { recursive: true });
     }
 
-    // 2. Install production dependencies in PackagedCopy
-    console.log('Installing dependencies in PackagedCopy...');
-    execSync('npm install --production', { stdio: 'inherit', cwd: PACKAGED_DIR });
-
-    // 3. Run vsce package
+    // Run vsce package (assuming PackagedCopy is already prepared by upgrade.js)
     console.log('Packaging extension using vsce...');
     try {
         // use local vsce if global isn't available
