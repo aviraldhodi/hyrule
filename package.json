@@ -2,7 +2,7 @@
 	"name": "hyrule",
 	"displayName": "Hyrule Salesforce Admin",
 	"description": "Local-first Salesforce operations platform",
-	"version": "1.0.0",
+	"version": "0.0.2",
 	"publisher": "aviraldhodi",
 	"engines": {
 		"vscode": "^1.74.0",
