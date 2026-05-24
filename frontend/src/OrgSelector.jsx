@@ -27,7 +27,7 @@ const TopBar = () => {
           setOrgs(allOrgs);
           if (allOrgs.length > 0) {
             const firstActive = allOrgs.find(o => o.connectedStatus !== 'Expired');
-            setActiveOrg(firstActive ? (firstActive.alias || firstActive.username) : '');
+            setActiveOrg(firstActive ? firstActive.username : '');
           }
         }
       })
@@ -63,7 +63,7 @@ const TopBar = () => {
 
   const handleSelectOrg = (org) => {
     if (org.connectedStatus === 'Expired') return;
-    setActiveOrg(org.alias || org.username);
+    setActiveOrg(org.username);
     setIsDropdownOpen(false);
   };
 
@@ -101,7 +101,7 @@ const TopBar = () => {
               borderRadius: '4px',
               cursor: 'pointer',
               fontWeight: 'bold',
-              minWidth: '180px',
+              minWidth: '280px',
               textAlign: 'left',
               display: 'flex',
               justifyContent: 'space-between',
@@ -122,13 +122,13 @@ const TopBar = () => {
               border: '1px solid var(--border-color)',
               borderRadius: '4px',
               boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-              width: '280px',
-              maxHeight: '350px',
+              width: '400px',
+              maxHeight: '400px',
               overflowY: 'auto',
               zIndex: 150
             }}>
               {orgs.map((org, i) => {
-                const orgId = org.alias || org.username;
+                const orgId = org.username;
                 const isExpired = org.connectedStatus === 'Expired';
                 const orgMappedColor = getOrgColor(orgId);
 
@@ -144,21 +144,12 @@ const TopBar = () => {
                       color: isExpired ? 'var(--palette-red)' : 'var(--text-color)',
                       borderBottom: '1px solid var(--border-color)',
                       display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
+                      alignItems: 'center',
+                      gap: '1rem'
                     }}
                   >
-                    <div>
-                      <div style={{ fontWeight: 'bold' }}>
-                        {isExpired ? '⚠️ ' : ''}{orgId}
-                      </div>
-                      <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>
-                        {org.username} {isExpired && '(Re-auth)'}
-                      </div>
-                    </div>
-                    
-                    {/* Gear Icon for Color Picker (only if not expired) */}
-                    {!isExpired && (
+                    {/* Gear Icon for Color Picker (only if not expired) on the Left */}
+                    {!isExpired ? (
                       <span 
                         onClick={(e) => openColorModal(e, orgId)}
                         style={{ 
@@ -172,7 +163,18 @@ const TopBar = () => {
                       >
                         ⚙️
                       </span>
+                    ) : (
+                      <span style={{ width: '1.2rem', padding: '0.3rem' }}>⚠️</span>
                     )}
+
+                    <div style={{ flex: 1, overflow: 'hidden' }}>
+                      <div style={{ fontWeight: 'bold', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                        {orgId}
+                      </div>
+                      <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>
+                        {org.alias ? `Alias: ${org.alias}` : 'No Alias'} {isExpired && '(Re-auth)'}
+                      </div>
+                    </div>
                   </div>
                 );
               })}
@@ -240,36 +242,34 @@ const TopBar = () => {
               ✕
             </button>
             <h3 style={{ margin: '0 0 1rem 0' }}>Pick Color for {modalOrg}</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
-              <div 
-                  onClick={() => { mapOrgToColor(modalOrg, ''); setIsModalOpen(false); }}
-                  style={{
-                    width: '40px', height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--secondary-color)',
-                    cursor: 'pointer',
-                    border: '2px solid var(--border-color)',
-                    display: 'flex', justifyContent: 'center', alignItems: 'center',
-                    fontSize: '0.8rem'
-                  }}
-                  title="Default"
-                >
-                  D
-              </div>
-              {availableColors.map(c => (
-                <div 
-                  key={c}
-                  onClick={() => { mapOrgToColor(modalOrg, c); setIsModalOpen(false); }}
-                  style={{
-                    width: '40px', height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: `var(--palette-${c})`,
-                    cursor: 'pointer',
-                    border: '2px solid transparent'
-                  }}
-                  title={c}
-                />
-              ))}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center' }}>
+              <input 
+                type="color" 
+                defaultValue="#ffffff"
+                onChange={(e) => mapOrgToColor(modalOrg, e.target.value)}
+                style={{
+                  width: '100%',
+                  height: '50px',
+                  cursor: 'pointer',
+                  border: 'none',
+                  padding: 0
+                }}
+              />
+              <button 
+                onClick={() => { mapOrgToColor(modalOrg, ''); setIsModalOpen(false); }}
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  backgroundColor: 'var(--secondary-color)',
+                  color: 'var(--bg-color)',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold'
+                }}
+              >
+                Reset to Default Theme Color
+              </button>
             </div>
           </div>
         </div>

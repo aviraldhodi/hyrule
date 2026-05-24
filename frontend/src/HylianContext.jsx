@@ -19,10 +19,10 @@ export const HylianProvider = ({ children }) => {
     setOrgColorMappings(prev => ({ ...prev, [orgAlias]: colorKey }));
   };
 
-  const getOrgColor = (orgAlias) => {
-    const mappedColor = orgColorMappings[orgAlias];
+  const getOrgColor = (orgUsername) => {
+    const mappedColor = orgColorMappings[orgUsername];
     if (mappedColor) {
-      return `var(--palette-${mappedColor})`;
+      return mappedColor; // Now storing exact hex values
     }
     return 'var(--secondary-color)'; // Default standard secondary color
   };
