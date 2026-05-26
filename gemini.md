@@ -4,6 +4,7 @@
 Hyrule is a local-first Salesforce operations platform built as a VS Code extension. It relies heavily on the Salesforce CLI and provides a full browser-based UI for complex admin tasks like Query Building, Data Loading, and Permission Management.
 
 ## Architecture
+- **Package Details**: The extension is registered with the ID `hyrule-extension` (matching the folder path requirement) but simply displays as `Hyrule` in the VS Code marketplace.
 - **VS Code Extension (`extension.js`)**: Uses `child_process.fork()` to spin up a background Node.js process without blocking the main VS Code thread. It opens the user's default browser to `http://localhost:3030`.
 - **Backend (`server.js`)**: An Express server running in the background. It executes `sf org list --all --json` to fetch all authenticated orgs, including expired ones.
 - **Frontend (`frontend/`)**: A React + Vite application. It builds into the root `public/` directory so the Express server can serve it.
