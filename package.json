@@ -1,6 +1,6 @@
 {
 	"name": "hyrule-extension",
-	"displayName": "Hyrule Salesforce Admin",
+	"displayName": "Hyrule",
 	"description": "Local-first Salesforce operations platform",
 	"version": "0.0.2",
 	"publisher": "aviraldhodi",
