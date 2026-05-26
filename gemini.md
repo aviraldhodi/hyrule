@@ -16,10 +16,10 @@ Hyrule is a local-first Salesforce operations platform built as a VS Code extens
 - **Auto-Open**: Once the command is run, `extension.js` forks the Node process. When `server.js` finishes starting on port `3030`, it sends a standard Node IPC message (`process.send('SERVER_READY')`) back to the Extension Host. The extension then automatically launches the user's default browser to `http://localhost:3030`.
 
 ## Dev & Packaging Scripts
-We avoid bundling heavy Node.js runtimes. The footprint is extremely small (under 100KB).
+We avoid bundling heavy Node.js runtimes. The footprint is extremely small.
 - `npm run dev`: Runs `scripts/dev.js` which concurrently launches the Express server and the Vite dev server for seamless development (with `shell: true` to support Windows environments).
 - `npm run upgrade`: Runs `scripts/upgrade.js`. Copies all dev code into the `PackagedCopy/` directory, omitting anything listed in `ignore_dnb`.
-- `npm run build`: Runs `scripts/build.js`. Syncs to `PackagedCopy/`, runs `vsce package` inside it, and moves the final `.vsix` file to `vsixBuilds/`.
+- `npm run build`: Runs `scripts/build.js`. Runs `vsce package` inside `PackagedCopy` and moves the final `.vsix` file to `vsixBuilds/`. Note: This script assumes you have manually placed any required `node_modules` inside `PackagedCopy` if needed.
 
 ## Theming
 Themes are controlled via CSS variables in `themes.css`. Supported themes:

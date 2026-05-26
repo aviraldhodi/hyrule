@@ -14,11 +14,7 @@ function run() {
         fs.mkdirSync(VSIX_BUILDS_DIR, { recursive: true });
     }
 
-    console.log('Bundling extension and server with esbuild...');
-    execSync('npx esbuild extension.js --bundle --outfile=PackagedCopy/extension.js --external:vscode --format=cjs --platform=node', { stdio: 'inherit', cwd: ROOT_DIR });
-    execSync('npx esbuild server.js --bundle --outfile=PackagedCopy/server.js --format=cjs --platform=node', { stdio: 'inherit', cwd: ROOT_DIR });
-
-    // Run vsce package (assuming PackagedCopy is already prepared by upgrade.js)
+    // Run vsce package (assuming PackagedCopy is already prepared by upgrade.js and any manual dependencies are placed)
     console.log('Packaging extension using vsce...');
     try {
         // use local vsce if global isn't available
